@@ -68,36 +68,32 @@ const cardData = [
 export default function CardContainer() {
   return (
     <div className="card-container">
-      <Card
-        imageUrl="/img-1.jpeg"
-        title="Мокка"
-        description="Развиваем финтех-продукт для международного рынка"
-        date="24 апреля 2024"
-      />
+      {cardData.map((item) => (
+        <Card itemObj={item} />
+      ))}
     </div>
   );
 }
 
-function Card(props) {
+function Card({ itemObj }) {
+  if (itemObj.archived) return null;
   return (
     <div className="card">
-      <img className="card-image" src={props.imageUrl} alt={props.title} />
+      <img className="card-image" src={itemObj.imageUrl} alt={itemObj.title} />
       <div className="card-content">
-        <div className="card-title">{props.title}</div>
-        <div className="card-description">{props.description}</div>
-        <div className="card-date">{props.date}</div>
-        <CardTag tags={["#финтех", "#международный", "#рынок"]} />
+        <h2 className="card-title">{itemObj.title}</h2>
+        <p className="card-description">{itemObj.description}</p>
+        <p className="card-date">{itemObj.date}</p>
+        <div className="card-tags">
+          {itemObj.tags.map((item) => (
+            <CardTag tag={item} />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-function CardTag(props) {
-  return (
-    <div className="card-tags">
-      <div className="card-tag">{props.tags[0]}</div>
-      <div className="card-tag">{props.tags[1]}</div>
-      <div className="card-tag">{props.tags[2]}</div>
-    </div>
-  );
+function CardTag({ tag }) {
+  return <div className="card-tag">{tag}</div>;
 }
