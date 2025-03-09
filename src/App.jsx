@@ -69,7 +69,7 @@ export default function CardContainer() {
   return (
     <div className="card-container">
       <Card
-        imageUrl="/img-2.jpeg"
+        imageUrl="/img-1.jpeg"
         title="Мокка"
         description="Развиваем финтех-продукт для международного рынка"
         date="24 апреля 2024"
@@ -82,12 +82,22 @@ function Card(props) {
   return (
     <div className="card">
       <img className="card-image" src={props.imageUrl} alt={props.title} />
-      <div className="card-title">{props.title}</div>
-      <CardTag />
+      <div className="card-content">
+        <div className="card-title">{props.title}</div>
+        <div className="card-description">{props.description}</div>
+        <div className="card-date">{props.date}</div>
+        <CardTag tags={["#финтех", "#международный", "#рынок"]} />
+      </div>
     </div>
   );
 }
 
-function CardTag() {
-  return <div>cardTag</div>;
+function CardTag(props) {
+  return (
+    <div className="card-tags">
+      <div className="card-tag">{props.tags[0]}</div>
+      <div className="card-tag">{props.tags[1]}</div>
+      <div className="card-tag">{props.tags[2]}</div>
+    </div>
+  );
 }
